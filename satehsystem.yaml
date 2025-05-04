@@ -1,0 +1,20 @@
+- name: Disable mpm_event module
+  apache2_module:
+    name: mpm_event
+    state: absent
+
+- name: Enable mpm_prefork module
+  apache2_module:
+    name: mpm_prefork
+    state: present
+
+- name: Enable php8.1 module
+  apache2_module:
+    name: php8.1
+    state: present
+
+- name: Restart apache2
+  service:
+    name: apache2
+    state: restarted
+

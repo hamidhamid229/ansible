@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استفاده از فونت خارجی</title>
+    <style>
+        /* بارگذاری فونت از لینک خارجی */
+        @font-face {
+            font-family: 'Chernobyl';
+            src: url('https://11hamid.s3.ir-thr-at1.arvanstorage.ir/Chernobyl.otf?versionId=') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* اعمال فونت به بدنه صفحه */
+        body {
+            font-family: 'Chernobyl', sans-serif;
+            direction: rtl; /* برای نمایش متن از راست به چپ */
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        p {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>سلام، این متن با فونت "Chernobyl" است!</h1>
+    <p>این یک پاراگراف است که با فونت سفارشی بارگذاری شده از لینک استفاده می‌شود.</p>
+</body>
+</html>
+

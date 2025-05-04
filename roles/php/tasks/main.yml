@@ -1,0 +1,9 @@
+---
+- name: Install PHP and required modules
+  apt:
+    name:
+      - php
+      - php-mysql
+      - libapache2-mod-php
+    state: present
+

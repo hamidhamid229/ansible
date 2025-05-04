@@ -1,0 +1,56 @@
+---
+- name: Install required PHP modules for WordPress
+  apt:
+    name:
+      - php-curl
+      - php-gd
+      - php-mbstring
+      - php-xml
+      - php-xmlrpc
+      - php-soap
+      - php-intl
+      - php-zip
+    state: present
+    update_cache: yes
+
+- name: Download WordPress
+  get_url:
+    url: https://wordpress.org/latest.tar.gz
+    dest: /tmp/wordpress.tar.gz
+
+- name: Extract WordPress
+  unarchive:
+    src: /tmp/wordpress.tar.gz
+    dest: /var/www/html/
+    remote_src: yes
+    extra_opts: [--strip-components=1]
+
+- name: Set proper permissions for WordPress
+  file:
+    path: /var/www/html
+    owner: www-data
+    group: www-data
+    state: directory
+    recurse: yes
+
+- name: Create WordPress Database
+  mysql_db:
+    name: wordpress
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Create WordPress Database User
+  mysql_user:
+    name: hamid
+    password: hamid123
+    priv: 'wordpress.*:ALL'
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Copy wp-config.php
+  template:
+    src: wp-config.php.j2
+    dest: /var/www/html/wp-config.php
+    owner: www-data
+    group: www-data
+

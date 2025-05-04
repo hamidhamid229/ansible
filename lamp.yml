@@ -1,0 +1,10 @@
+---
+- name: Install LAMP Stack on worker1
+  hosts: webservers
+  become: yes
+
+  roles:
+    - apache
+    - mysql
+    - php
+    - wordpress

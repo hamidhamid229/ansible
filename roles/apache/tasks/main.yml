@@ -1,0 +1,34 @@
+---
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Copy Nginx config file
+  copy:
+    src: hamidrezaheidari.ir.conf
+    dest: /etc/nginx/sites-available/hamidrezaheidari.ir
+    owner: root
+    group: root
+    mode: '0644'
+
+
+- name: Remove default site
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Deploy index.html from template
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: www-data
+    group: www-data
+    mode: '0644'
+
+- name: Reload Nginx
+  service:
+    name: nginx
+    state: reloaded
+
